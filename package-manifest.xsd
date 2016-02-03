@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Manifest" nillable="true" type="Manifest"/>
+  <xs:complexType name="Manifest">
+    <xs:all>
+      <xs:element name="Metadata" type="Metadata"/>
+      <xs:element name="Parameters" type="ArrayOfParameter"/>
+      <xs:element minOccurs="0" name="Execution" type="Execution"/>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Execution">
+    <xs:all>
+      <xs:element name="Mode" type="ExecutionMode"/>
+      <xs:element name="Command" type="xs:string"/>
+      <xs:element name="RebootOnSuccess" type="xs:boolean" default="false"/>
+      <xs:element name="Persistent" type="xs:boolean" default="false"/>
+    </xs:all>
+  </xs:complexType>
+  <xs:simpleType name="ExecutionMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PowerShell"/>
+      <xs:enumeration value="Command"/>
+      <xs:enumeration value="Ssh"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Metadata">
+    <xs:all>
+      <xs:element name="Name" type="xs:string"/>
+      <xs:element name="Description" type="xs:string"/>
+      <xs:element name="UUID" type="Guid"/>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfParameter">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Parameter" nillable="true" type="Parameter"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Parameter">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Option" type="Option"/>
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:string" use="required"/>
+    <xs:attribute name="Default" type="xs:string" use="optional"/>
+    <xs:attribute name="Variable" type="xs:string" use="required"/>
+    <xs:attribute name="Regex" type="xs:string" use="optional"/>
+    <xs:attribute name="Type" type="ParameterType" use="required"/>
+    <xs:attribute name="Prompt" type="PromptType" use="optional"/>
+    <xs:attribute name="Hint" type="xs:string" use="optional"/>
+    <xs:attribute name="Global" type="xs:boolean" use="optional"/>
+	<xs:attribute name="Required" type="xs:boolean" use="optional" default="true"/>
+  </xs:complexType>
+  <xs:complexType name="Option">
+    <xs:attribute name="Name" type="xs:string" use="optional"/>
+    <xs:attribute name="Value" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:simpleType name="PromptType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None"/>
+      <xs:enumeration value="Build"/>
+      <xs:enumeration value="Design"/>
+      <xs:enumeration value="Global"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ParameterType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Network"/>
+      <xs:enumeration value="Numeric"/>
+      <xs:enumeration value="Option"/>
+      <xs:enumeration value="MultiSelect"/>
+      <xs:enumeration value="Password"/>
+      <xs:enumeration value="Server"/>
+      <xs:enumeration value="ServerIP"/>
+      <xs:enumeration value="String"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Guid">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

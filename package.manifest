@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Manifest>
+<Metadata>
+<UUID>
+8f65080c-a638-11e4-ac01-525400f9f997
+</UUID>
+    <Name>Install dynaTrace Free Trial - Server AIO 6.1.0.7880 for Linux x86 64 bit Public Prod</Name>
+	<Description>Install dynaTrace Free Trial - dynatrace-6.1.0.7880-x64 Server for Linux x86 64 bit and dependencies</Description>
+  </Metadata>
+  <Parameters>
+    <Parameter Name="Install Dir" Variable="T3.prefix" Type="String" Prompt="Build" Required="true" Hint="Default is /opt/dynatrace-6.1.0 - Install will fail if directory already exists"/> 
+	<Parameter Name="Postgres Admin User Password" Variable="T3.pgpasswd" Type="String" Prompt="Build" Required="true" Hint="Password for PostgreSQL admin user account"/> 
+	<Parameter Name="Postgres Dynatrace User Password" Variable="T3.dtpgpasswd" Type="String" Prompt="Build" Required="true" Hint="Password for PostgreSQL Dynatrace user account"/> 
+	<Parameter Name="Free Trial User First Name" Variable="T3.dtftfirstname" Type="String" Prompt="Build" Required="true" Hint="First Name for Free Trial Signup"/> 
+	<Parameter Name="Free Trial User Last Name" Variable="T3.dtftlastname" Type="String" Prompt="Build" Required="true" Hint="Last Name for Free Trial Signup"/> 
+	<Parameter Name="Free Trial User EMail" Variable="T3.dtftemail" Type="String" Prompt="Build" Required="true" Hint="Email address for Free Trial Signup, required to confirm account"/> 	
+	<Parameter Name="Free Trial User Company Name" Variable="T3.dtftcompany" Type="String" Prompt="Build" Required="true" Hint="Company Name for Free Trial Signup"/>
+  </Parameters>
+<Execution>
+    <Mode>Ssh</Mode>
+        <Command>install-free-trial-dynatrace-6.1.0.7880-x64.sh "${T3.prefix}" "${T3.pgpasswd}" "${T3.dtpgpasswd}" "${T3.dtftfirstname}" "${T3.dtftlastname}" "${T3.dtftemail}" "${T3.dtftcompany}"</Command>
+        <Persistent>false</Persistent>
+  </Execution>
+ </Manifest>
