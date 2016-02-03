@@ -2,9 +2,7 @@
 
 # Issue Free Trial web request
 # original request:
-# curl https://apps.compuware.com/apm/eserviceprocessing.php?email=akirasoft%40gmail.com&firstname=Michael&lastname=Villiger&company=Dyntrace%20-%20Testing%20Free%20Trial%20Web%20Form&jsoncallback=jQuery1111034425609093159437_1418675620560&_=1418675620561
 
-#curl -G --data-urlencode "email=${6}" --data-urlencode "firstname=${4}" --data-urlencode "firstname=${4}"  --data-urlencode "lastname=${5}" --data-urlencode "company=${7}" https://apps.compuware.com/apm/eserviceprocessing.php
 
 curl -H "Content-Type: application/json" -d '{"email":"'"${6}"'","firstName":"'"${4}"'","lastName":"'"${5}"'","company":"'"${7}"'", "sourceTag":"CenturyLink"}' https://eservices.compuwareapm.com/eservices/rest/trialwebservice/processtrialpost
 
